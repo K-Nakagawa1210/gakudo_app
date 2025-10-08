@@ -1,0 +1,10 @@
+<div class="container mt-5">
+  <div class="card p-4 shadow">
+    <h2 class="mb-3 text-primary">ようこそ、<%= current_user.club_name %> さん！</h2>
+    <ul>
+      <li><strong>住所：</strong><%= current_user.address %></li>
+      <li><strong>電話番号：</strong><%= current_user.phone_number %></li>
+    </ul>
+    <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'btn btn-danger mt-3' %>
+  </div>
+</div>
