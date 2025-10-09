@@ -69,6 +69,9 @@ end
 
 gem 'pry-rails'
 gem 'devise'
+gem "bootstrap", "~> 5.3"
+
+gem "cssbundling-rails", "~> 1.4"
 gem 'devise-i18n'
 
 
