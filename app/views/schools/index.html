@@ -1,0 +1,6 @@
+<h1>小学校一覧</h1>
+<ul>
+  <% @schools.each do |school| %>
+    <li><%= link_to school.name, school_students_path(school) %></li>
+  <% end %>
+</ul>
