@@ -4,7 +4,13 @@ Rails.application.routes.draw do
   root to: "homes#index"
   get "homes", to: "homes#index"
 
-  resources :schools, only: [:index, :show] # 出席登録ページ用
-  resources :attendances, only: [:index, :edit, :update] # 出席一覧ページ用
+  resources :schools, only: [:index, :show] do
+    resources :students, only: [:index] do
+      collection do
+        post :attend
+      end
+    end
+  end
+  resources :attendances, only: [:index]
   resources :settings, only: [:index, :edit, :update]    # 設定ページ用
 end

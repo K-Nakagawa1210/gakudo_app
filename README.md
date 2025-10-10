@@ -45,7 +45,7 @@
 - 保護者連絡帳  
 
 ## データベース設計
-[※ER図](https://gyazo.com/2caa141f4ddfab0e9deeb10867261985)
+[※ER図](https://gyazo.com/564c207d90e561b37084a24f4e6e1f7d)
 
 ## 画面遷移図
 [※画面遷移図](https://gyazo.com/0899e81a1b493cbd9c8be170eb860c41)
