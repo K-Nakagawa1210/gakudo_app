@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   root to: "homes#index"
   get "homes", to: "homes#index"
 
-  resources :schools, only: [:index, :show] do
+  resources :schools do
     resources :students, only: [:index] do
       collection do
         post :attend
@@ -12,5 +12,5 @@ Rails.application.routes.draw do
     end
   end
   resources :attendances, only: [:index]
-  resources :settings, only: [:index, :edit, :update]    # 設定ページ用
+  resources :settings, only: [:index]    # 設定ページ用
 end

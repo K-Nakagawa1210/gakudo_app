@@ -1,0 +1,14 @@
+<h1>学校を追加</h1>
+
+<%= form_with model: @school, local: true do |f| %>
+  <div>
+    <%= f.label :school_name, "学校名" %><br>
+    <%= f.text_field :school_name %>
+  </div>
+
+  <div>
+    <%= f.submit "追加", class: "btn btn-primary" %>
+  </div>
+<% end %>
+
+<%= link_to "一覧に戻る", schools_path %>
