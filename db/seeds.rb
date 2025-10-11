@@ -1,9 +1,19 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+grades = [
+  { grade_name: "1年生", level: 1, year: 2025 },
+  { grade_name: "2年生", level: 2, year: 2025 },
+  { grade_name: "3年生", level: 3, year: 2025 },
+  { grade_name: "4年生", level: 4, year: 2025 },
+  { grade_name: "5年生", level: 5, year: 2025 },
+  { grade_name: "6年生", level: 6, year: 2025 }
+]
+
+grades.each do |grade|
+  # DBのカラム名に正しくマッピング
+  Grade.create!(
+    name: grade[:grade_name],  # ← ここを必ず name にする
+    level: grade[:level],
+    year: grade[:year]
+  )
+end
+
+puts "Grades seeded successfully!"

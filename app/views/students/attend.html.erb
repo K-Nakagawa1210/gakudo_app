@@ -1,0 +1,41 @@
+<h1><%= @school.name %> 児童一覧</h1>
+
+<!-- 現在時刻のリアルタイム表示 -->
+<p class="text-lg font-semibold">
+  現在時刻：<span id="current-time"></span>
+</p>
+
+<%= form_with url: attend_school_students_path(@school), method: :post do %>
+  <ul>
+    <% @students.each do |student| %>
+      <li style="margin: 8px 0;">
+        <%= check_box_tag "student_ids[]", student.id %>
+        <%= student.grade.grade_name %>年 <%= student.student_name %>
+      </li>
+    <% end %>
+  </ul>
+
+  <%= submit_tag "出席", class: "btn btn-primary" %>
+<% end %>
+
+<!-- 秒単位で時刻をリアルタイム更新 -->
+<script>
+  function updateTime() {
+    const now = new Date();
+    const formatted = now.toLocaleString('ja-JP', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit'
+    });
+    document.getElementById('current-time').textContent = formatted;
+  }
+
+  // ページ読み込み時に即時実行＋1秒ごとに更新
+  document.addEventListener("DOMContentLoaded", () => {
+    updateTime();
+    setInterval(updateTime, 1000);
+  });
+</script>
