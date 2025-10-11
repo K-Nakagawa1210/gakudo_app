@@ -1,0 +1,24 @@
+<h1><%= @student.new_record? ? "児童追加" : "児童編集" %></h1>
+
+<%= form_with model: @student, local: true do |f| %>
+  <div>
+    <%= f.label :student_name, "児童名" %><br>
+    <%= f.text_field :student_name %>
+  </div>
+
+  <div>
+    <%= f.label :school_id, "学校" %><br>
+    <%= f.collection_select :school_id, @schools, :id, :school_name, prompt: "選択してください" %>
+  </div>
+
+  <div>
+    <%= f.label :grade_id, "学年" %><br>
+    <%= f.collection_select :grade_id, Grade.all, :id, :grade_name, prompt: "選択してください" %>
+  </div>
+
+  <div>
+    <%= f.submit @student.new_record? ? "追加" : "更新", class: "btn btn-primary" %>
+  </div>
+<% end %>
+
+<%= link_to "一覧に戻る", students_path %>

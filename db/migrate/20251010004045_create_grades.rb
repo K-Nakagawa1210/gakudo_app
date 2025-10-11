@@ -1,8 +1,10 @@
-class CreateGrades < ActiveRecord::Migration[7.1]
+class CreateGrades < ActiveRecord::Migration[7.0]
   def change
     create_table :grades do |t|
-      t.string :name,   null: false       # 表示用（例："1年生"）
-      t.integer :level, null: false       # 論理用（例：1, 2, 3, ...）
+      t.string :name, null: false             # seeds.rb の grade_name を格納
+      t.integer :level,     null: false       # 学年のレベル
+      t.integer :year                         # 年度
+
       t.timestamps
     end
   end
