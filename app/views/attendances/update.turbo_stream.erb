@@ -1,0 +1,18 @@
+<turbo-stream action="replace" target="modal">
+  <template></template> <!-- モーダルを閉じる -->
+</turbo-stream>
+
+<turbo-stream action="replace" target="<%= dom_id(@attendance) %>">
+  <template>
+    <td style="text-align:center;">
+      <%= @attendance.status == "present" ? "〇" : "×" %><br>
+      <% if @attendance.arrival_time.present? %>
+        <small>登園: <%= @attendance.arrival_time.strftime("%H:%M") %></small><br>
+      <% end %>
+      <% if @attendance.leave_time.present? %>
+        <small>帰宅: <%= @attendance.leave_time.strftime("%H:%M") %></small><br>
+      <% end %>
+      <%= link_to "編集", edit_attendance_path(@attendance, format: :turbo_stream), data: { turbo_frame: "modal" }, class: "btn btn-sm btn-secondary mt-1" %>
+    </td>
+  </template>
+</turbo-stream>

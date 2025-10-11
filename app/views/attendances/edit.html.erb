@@ -1,2 +1,23 @@
-<h1>Attendances#edit</h1>
-<p>Find me in app/views/attendances/edit.html.erb</p>
+<h1>出欠編集 - <%= @attendance.student.student_name %> / <%= @attendance.date.strftime("%Y-%m-%d") %></h1>
+
+<%= form_with(model: @attendance, local: true) do |f| %>
+  <div>
+    <%= f.label :status, "出欠" %><br>
+    <%= f.select :status, Attendance.statuses.keys.map { |k| [k == "present" ? "〇 出席" : "× 欠席", k] } %>
+  </div>
+
+  <div>
+    <%= f.label :arrival_time, "登園時間" %><br>
+    <%= f.time_field :arrival_time, value: @attendance.arrival_time&.strftime("%H:%M") %>
+  </div>
+
+  <div>
+    <%= f.label :leave_time, "帰宅時間" %><br>
+    <%= f.time_field :leave_time, value: @attendance.leave_time&.strftime("%H:%M") %>
+  </div>
+
+  <div style="margin-top:10px;">
+    <%= f.submit "更新", class: "btn btn-primary" %>
+    <%= link_to "キャンセル", attendances_path(month: @attendance.date.beginning_of_month), class: "btn btn-secondary" %>
+  </div>
+<% end %>

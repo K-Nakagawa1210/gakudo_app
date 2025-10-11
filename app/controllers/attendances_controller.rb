@@ -3,22 +3,27 @@ class AttendancesController < ApplicationController
 
   def index
     @month = params[:month] ? Date.parse(params[:month]) : Date.current.beginning_of_month
-    @students = Student.order(:id)
-    @dates = (@month.beginning_of_month..@month.end_of_month).to_a
-
-    @attendances = Attendance
-                     .includes(:student)
-                     .where(date: @month.beginning_of_month..@month.end_of_month)
-                     .order(:date, "students.id")
-                     .group_by(&:date)
+    @dates = (@month..@month.end_of_month).to_a
+    @students = Student.all
+    @attendances = Attendance.where(date: @dates).group_by(&:date)
+    @attendance = Attendance.new # モーダルで使う新しいインスタンス
   end
 
   def edit
+    @attendance = Attendance.find(params[:id])
+    respond_to do |format|
+      format.turbo_stream
+      format.html
+    end
   end
 
   def update
+    @attendance = Attendance.find(params[:id])
     if @attendance.update(attendance_params)
-      redirect_to attendances_path(month: @attendance.date.beginning_of_month), notice: "出欠を更新しました。"
+      respond_to do |format|
+        format.turbo_stream
+        format.html { redirect_to attendances_path(month: @attendance.date.beginning_of_month), notice: "出欠を更新しました。" }
+      end
     else
       render :edit, status: :unprocessable_entity
     end
