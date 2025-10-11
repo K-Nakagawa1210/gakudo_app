@@ -14,7 +14,13 @@ Rails.application.routes.draw do
       end
     end
   end
-  resources :attendances, only: [:index]
+
+  resources :attendances, only: [:index, :edit, :update] do
+    collection do
+      get :export_csv
+    end
+  end
+
   resources :settings, only: [:index]
   resources :students, except: [:show] 
 end
