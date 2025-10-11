@@ -7,7 +7,7 @@
   <%= link_to "CSV出力", export_csv_attendances_path(month: @month.strftime("%Y-%m-01")), class: "btn btn-success", style: "float: right;" %>
 </div>
 
-<table border="1" cellspacing="0" cellpadding="4">
+<table border="1" cellspacing="0" cellpadding="4" class="table table-bordered">
   <thead>
     <tr>
       <th>児童名</th>
@@ -22,7 +22,7 @@
         <td><%= student.student_name %></td>
         <% @dates.each do |day| %>
           <% record = @attendances[day]&.find { |a| a.student_id == student.id } %>
-          <td style="text-align: center; vertical-align: middle;">
+          <td style="text-align:center; vertical-align:middle;">
             <% if record %>
               <%= record.status == "present" ? "〇" : "×" %><br>
               <% if record.arrival_time.present? %>
@@ -31,7 +31,7 @@
               <% if record.leave_time.present? %>
                 <small>帰宅: <%= record.leave_time.strftime("%H:%M") %></small><br>
               <% end %>
-              <%= link_to "編集", edit_attendance_path(record), class: "btn btn-sm btn-secondary mt-1" %>
+              <%= link_to "編集", edit_attendance_path(record, format: :turbo_stream), data: { turbo_frame: "modal" }, class: "btn btn-sm btn-secondary mt-1" %>
             <% else %>
               －
             <% end %>
@@ -41,3 +41,6 @@
     <% end %>
   </tbody>
 </table>
+
+<!-- モーダルのフレーム -->
+<turbo-frame id="modal"></turbo-frame>
