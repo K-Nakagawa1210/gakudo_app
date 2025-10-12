@@ -6,12 +6,17 @@ Rails.application.routes.draw do
   get 'settings', to: 'settings#index'
 
   resources :schools do
-    resources :students, only: [] do
+    resources :students, only: [:index] do
       collection do
         get :attend             # 出席画面表示
         post :attend            # 出席登録
+        post :leave             # 帰宅登録
         get :index_by_school    # 学校ごとの児童一覧
       end
+    end
+
+    collection do
+      get :attendance_index, to: "schools#attendance_index"
     end
   end
 

@@ -1,27 +1,53 @@
-<h1>児童一覧</h1>
+<div class="container my-4">
+  <div class="text-center mb-3">
+    <h5 id="current-time"><%= @today.strftime("%Y年%m月%d日 %H:%M:%S") %> 現在</h5>
+    <h3><%= @school.school_name %> の児童</h3>
+  </div>
 
-<%= link_to "追加", new_student_path, class: "btn btn-primary" %>
+  <%= form_with url: attend_school_students_path(@school), method: :post, local: true, id: "attendance-form" do %>
+    <% grouped_students = @students.group_by { |s| s.grade.level } %>
 
-<table>
-  <thead>
-    <tr>
-      <th>学校名</th>
-      <th>学年</th>
-      <th>児童名</th>
-      <th>操作</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @students.each do |student| %>
-      <tr>
-        <td><%= student.school.school_name %></td>
-        <td><%= student.grade.grade_name %></td>
-        <td><%= student.student_name %></td>
-        <td>
-          <%= link_to "編集", edit_student_path(student), class: "btn btn-secondary" %>
-          <%= link_to "削除", student_path(student), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
-        </td>
-      </tr>
+    <% grouped_students.sort.each do |grade_level, students| %>
+      <div class="card mb-3 shadow-sm">
+        <div class="card-header bg-light fw-bold"><%= grade_level %>年生</div>
+        <div class="card-body">
+          <div class="d-flex flex-wrap">
+            <% students.each do |student| %>
+              <div class="student-item border rounded m-1 p-2 text-center flex-fill"
+                   style="min-width: 100px; cursor: pointer;"
+                   data-student-id="<%= student.id %>">
+                <%= student.name %>
+                <%= check_box_tag "student_ids[]", student.id, false, class: "d-none" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
     <% end %>
-  </tbody>
-</table>
+
+    <div class="text-center mt-4">
+      <%= button_tag "登園", type: "submit", name: "action_type", value: "attend", class: "btn btn-success px-4 me-3" %>
+      <%= button_tag "帰宅", type: "submit", name: "action_type", value: "leave", class: "btn btn-danger px-4" %>
+    </div>
+  <% end %>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  function updateTime() {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = now.getMonth() + 1;
+    const day = now.getDate();
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+
+    document.getElementById("current-time").textContent =
+      `${year}年${month}月${day}日 ${hours}:${minutes}:${seconds} 現在`;
+  }
+
+  updateTime();                 // 初回表示
+  setInterval(updateTime, 1000); // 1秒ごとに更新
+});
+</script>
