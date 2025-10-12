@@ -4,6 +4,10 @@ class SchoolsController < ApplicationController
     @schools = School.all.order(:school_name)
   end
 
+  def attendance_index
+    @schools = School.all
+  end
+
   def show
     @school = School.find(params[:id])
     @students = @school.students.order(:grade, :school_name)
