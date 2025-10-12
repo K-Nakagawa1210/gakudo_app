@@ -16,7 +16,7 @@
               <div class="student-item border rounded m-1 p-2 text-center flex-fill"
                    style="min-width: 100px; cursor: pointer;"
                    data-student-id="<%= student.id %>">
-                <%= student.name %>
+                <%= student.student_name %>
                 <%= check_box_tag "student_ids[]", student.id, false, class: "d-none" %>
               </div>
             <% end %>
