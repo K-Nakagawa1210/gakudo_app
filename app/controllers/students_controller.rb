@@ -1,13 +1,18 @@
 class StudentsController < ApplicationController
   before_action :set_student, only: [:edit, :update, :destroy]
-  before_action :set_school, only: [:attend, :leave, :index]
+  before_action :set_school, only: [:attend]
 
   # 小学校別児童一覧（出席登録画面）
-  def index
-    @school = School.find(params[:school_id])
-    @students = @school.students.order(:grade_id, :student_name)
-    @today = Time.current
+def index
+  if params[:school_id].present?
+    @school = School.find(params[:school_id]) # 学校ごとの児童一覧（出席登録など）
+    @students = @school.students.where(user_id: current_user.id).order(:grade_id, :student_name)
+  else
+    @students = current_user.students.includes(:school, :grade).order(:school_id, :grade_id, :student_name)  # 「設定」→「児童の設定」から来たとき（全児童一覧）
   end
+
+  @today = Time.current
+end
 
   def attend
     @school = School.find(params[:school_id])

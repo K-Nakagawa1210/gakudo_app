@@ -1,11 +1,11 @@
 class SchoolsController < ApplicationController
   before_action :set_school, only: [:edit, :update, :destroy]
   def index
-    @schools = School.all.order(:school_name)
+    @schools = current_user.schools.order(:school_name)
   end
 
   def attendance_index
-    @schools = School.all
+    @schools = current_user.schools.order(:school_name)
   end
 
   def show

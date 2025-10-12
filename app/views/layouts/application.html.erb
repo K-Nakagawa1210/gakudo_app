@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>GakudoApp</title>
+    <title>出欠管理アプリ</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -11,6 +11,23 @@
   </head>
 
   <body>
+    <% if user_signed_in? %>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm mb-3">
+        <div class="container-fluid">
+          <%= link_to current_user.club_name, root_path, class: "navbar-brand fw-bold text-primary" %>
+
+          <div class="d-flex">
+            <%= link_to "トップに戻る", root_path, class: "btn btn-outline-primary btn-sm me-2" %>
+            <%= link_to "ログアウト", destroy_user_session_path, method: :delete,
+                data: { confirm: "ログアウトしますか？" },
+                class: "btn btn-outline-secondary btn-sm" %>
+          </div>
+        </div>
+      </nav>
+    <% end %>
+
+    <div class="container">
+
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
 

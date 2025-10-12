@@ -4,9 +4,12 @@ class AttendancesController < ApplicationController
   def index
     @month = params[:month] ? Date.parse(params[:month]) : Date.current.beginning_of_month
     @dates = (@month..@month.end_of_month).to_a
-    @students = Student.all
-    @attendances = Attendance.where(date: @dates).group_by(&:date)
-    @attendance = Attendance.new # モーダルで使う新しいインスタンス
+    @students = Student.where(user_id: current_user.id) # 現在のユーザーの児童のみ取得    
+    attendances = Attendance.joins(:student)  # 該当月の出席データを取得して日付ごとにハッシュ化
+                            .where(students: { user_id: current_user.id }, date: @dates)
+                            .order(:date)
+    @attendances = attendances.group_by(&:date) # 日付をキーにしたハッシュを作成（例：@attendances[2025-10-12] => [Attendance, Attendance, ...]）
+    @attendance = Attendance.new  # モーダル用の新しいインスタンス
   end
 
   def edit

@@ -5,4 +5,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :schools, dependent: :destroy
+  has_many :students, dependent: :destroy
 end
