@@ -1,16 +1,36 @@
 class AttendancesController < ApplicationController
   before_action :set_attendance, only: [:edit, :update]
 
-  def index
-    @month = params[:month] ? Date.parse(params[:month]) : Date.current.beginning_of_month
-    @dates = (@month..@month.end_of_month).to_a
-    @students = Student.where(user_id: current_user.id) # 現在のユーザーの児童のみ取得    
-    attendances = Attendance.joins(:student)  # 該当月の出席データを取得して日付ごとにハッシュ化
-                            .where(students: { user_id: current_user.id }, date: @dates)
-                            .order(:date)
-    @attendances = attendances.group_by(&:date) # 日付をキーにしたハッシュを作成（例：@attendances[2025-10-12] => [Attendance, Attendance, ...]）
-    @attendance = Attendance.new  # モーダル用の新しいインスタンス
-  end
+ def index
+  # 表示する月を決定（パラメータがなければ当月）
+  @month = params[:month] ? Date.parse(params[:month]) : Date.current.beginning_of_month
+
+  # 月の全日付を配列で取得
+  @dates = (@month..@month.end_of_month).to_a
+
+  # 日本語曜日の配列を作り、日付と曜日を結合した文字列を作る
+  weekday_jp = %w(日 月 火 水 木 金 土)
+  @dates_with_weekday = @dates.map { |d| "#{d.strftime('%-m/%-d')}（#{weekday_jp[d.wday]}）" }
+
+  # 現在のユーザーの児童のみ取得
+  @students = Student.where(user_id: current_user.id).order(:grade_id, :student_name)
+
+  # 該当月の出席データを取得
+  attendances = Attendance.joins(:student)
+                          .where(students: { user_id: current_user.id }, date: @dates)
+                          .order(:date)
+
+  # 日付ごとにハッシュ化
+  @attendances = attendances.group_by(&:date)
+
+  # モーダル用に新しい Attendance インスタンスを作成
+  @attendance = Attendance.new
+
+  # 今日の日付＋曜日表示用
+  today = Date.current
+  @today_with_weekday = "#{today.strftime('%Y-%m-%d')}（#{weekday_jp[today.wday]}）"
+end
+
 
   def edit
     @attendance = Attendance.find(params[:id])

@@ -4,7 +4,7 @@
     <h3><%= @school.school_name %> の児童</h3>
   </div>
 
-  <%= form_with url: attend_school_students_path(@school), method: :post, local: true, id: "attendance-form" do %>
+  <%= form_with url: attend_create_school_students_path(@school), method: :post, local: true, id: "attendance-form" do %>
     <% grouped_students = @students.group_by { |s| s.grade.level } %>
 
     <% grouped_students.sort.each do |grade_level, students| %>
