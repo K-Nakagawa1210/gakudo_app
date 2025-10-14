@@ -1,26 +1,37 @@
 class StudentsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_student, only: [:edit, :update, :destroy]
   before_action :set_school, only: [:attend]
 
-  # 小学校別児童一覧（出席登録画面）
-def index
-  if params[:school_id].present?
-    @school = School.find(params[:school_id]) # 学校ごとの児童一覧（出席登録など）
-    @students = @school.students.where(user_id: current_user.id).order(:grade_id, :student_name)
-  else
-    @students = current_user.students.includes(:school, :grade).order(:school_id, :grade_id, :student_name)  # 「設定」→「児童の設定」から来たとき（全児童一覧）
+  # 児童管理ページ（設定画面)
+  def index
+    if params[:school_id]
+      @school = School.find(params[:school_id])
+      @students = current_user.students
+                  .where(school_id: @school.id)   # ← ここで絞り込み
+                  .includes(:school, :grade)
+                  .order(:grade_id, :student_name)
+    else
+      @school = nil
+      @students = current_user.students
+                  .includes(:school, :grade)
+                  .order(:school_id, :grade_id, :student_name)
+    end
+    @today = Time.current
   end
 
-  @today = Time.current
-end
-
   def attend
+    @school = School.find(params[:school_id])
+    @students = @school.students.order(:grade_id, :student_name)
+    @today = Date.current
+  end
+
+  def attend_create
     @school = School.find(params[:school_id])
     selected_ids = params[:student_ids] || []
     today = Date.current
 
     if params[:action_type] == "attend"
-      # 登園処理
       selected_ids.each do |id|
         Attendance.find_or_create_by(student_id: id, date: today) do |a|
           a.status = "present"
@@ -28,15 +39,12 @@ end
         end
       end
       message = "登園を登録しました"
-
     elsif params[:action_type] == "leave"
-      # 帰宅処理
       selected_ids.each do |id|
         attendance = Attendance.find_by(student_id: id, date: today)
         attendance&.update(leave_time: Time.current)
       end
       message = "帰宅を登録しました"
-
     else
       message = "処理が選択されていません"
     end
@@ -44,42 +52,52 @@ end
     redirect_to attendance_index_schools_path, notice: message
   end
 
-
   def leave
   end
 
 
   # 通常の生徒管理部分
+
+  def manage
+    @students = current_user.students.includes(:school, :grade).order(:school_id, :grade_id, :student_name)
+  end
+
   def new
-    @student = Student.new
-    @schools = School.all
+    @student = current_user.students.build
+    @schools = current_user.schools.order(:school_name)
+    @grades = Grade.order(:level)
   end
 
   def create
-    @student = Student.new(student_params)
+    @student = current_user.students.build(student_params)
     if @student.save
-      redirect_to students_path, notice: "#{@student.student_name}を追加しました"
+      redirect_to manage_students_path, notice: "児童を登録しました"
     else
-      @schools = School.all
-      render :new, status: :unprocessable_entity
+      @schools = current_user.schools.order(:school_name)
+      @grades = Grade.order(:level)
+      render :new
     end
   end
 
   def edit
-    @schools = School.all
+    @student = current_user.students.find(params[:id])
+    @schools = current_user.schools.order(:school_name)
+    @grades = Grade.order(:level)
   end
 
   def update
+    @student = current_user.students.find(params[:id])
     if @student.update(student_params)
-      redirect_to students_path, notice: "#{@student.student_name}を更新しました"
+      redirect_to manage_students_path, notice: "児童情報を更新しました"
     else
       render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
+    @student = current_user.students.find(params[:id])
     @student.destroy
-    redirect_to students_path, notice: "#{@student.student_name}を削除しました"
+    redirect_to manage_students_path, notice: "児童を削除しました"
   end
 
   private
