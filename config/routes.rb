@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     resources :students, only: [:index] do
       collection do
         get :attend             # 出席画面表示
-        post :attend            # 出席登録
+        post :attend_create     # 出席登録
         post :leave             # 帰宅登録
         get :index_by_school    # 学校ごとの児童一覧
       end
@@ -27,5 +27,9 @@ Rails.application.routes.draw do
   end
 
   resources :settings, only: [:index]
-  resources :students, except: [:show] 
+  resources :students, except: [:show] do
+    collection do
+      get :manage  # 児童設定ページ（学校に依存しない）
+    end
+  end
 end

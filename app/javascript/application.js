@@ -3,5 +3,5 @@ import "@hotwired/turbo-rails"
 import "controllers"
 import "bootstrap"
 import "bootstrap/dist/css/bootstrap.min.css"
-import Rails from "@rails/ujs"
-Rails.start()
+//import Rails from "@rails/ujs"
+//Rails.start()

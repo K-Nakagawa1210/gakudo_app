@@ -1,0 +1,37 @@
+<div class="container my-4">
+  <div class="text-center mb-3">
+    <h3>児童一覧（設定）</h3>
+  </div>
+
+  <div class="text-end mb-3">
+    <%= link_to "＋ 新しい児童を追加", new_student_path, class: "btn btn-primary" %>
+  </div>
+
+  <table class="table table-bordered table-striped">
+    <thead class="table-light">
+      <tr>
+        <th>名前</th>
+        <th>学校</th>
+        <th>学年</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @students.each do |student| %>
+        <tr>
+          <td><%= student.student_name %></td>
+          <td><%= student.school.school_name if student.school %></td>
+          <td><%= student.grade.level %>年</td>
+          <td>
+            <%= link_to "編集", edit_student_path(student), class: "btn btn-sm btn-warning me-1" %>
+            <%= button_to "削除", student_path(student), method: :delete, data: { turbo_confirm: "削除しますか？" }, class: "btn btn-sm btn-danger" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <div class="mt-3">
+    <%= link_to "🏠 トップに戻る", root_path, class: "btn btn-outline-secondary" %>
+  </div>
+</div>
