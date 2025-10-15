@@ -4,7 +4,7 @@
   <%= link_to "＜先月", attendances_path(month: (@month - 1.month).strftime("%Y-%m-01")), class: "btn btn-outline-primary" %>
   <%= link_to "来月＞", attendances_path(month: (@month + 1.month).strftime("%Y-%m-01")), class: "btn btn-outline-primary" %>
 
-  <%= link_to "CSV出力", export_csv_attendances_path(month: @month.strftime("%Y-%m-01")), class: "btn btn-success", style: "float: right;" %>
+  <%= link_to "Excel出力", export_xlsx_attendances_path(month: @month.strftime("%Y-%m-01")), class: "btn btn-success", style: "float: right;" %>
 </div>
 
 <table border="1" cellspacing="0" cellpadding="4" class="table table-bordered">
@@ -31,7 +31,7 @@
               <% if record.leave_time.present? %>
                 <small>帰宅: <%= record.leave_time.strftime("%H:%M") %></small><br>
               <% end %>
-              <%= link_to "編集", edit_attendance_path(record, format: :turbo_stream), data: { turbo_frame: "modal" }, class: "btn btn-sm btn-secondary mt-1" %>
+              <%= link_to "編集", edit_attendance_path(record), data: { turbo_frame: "modal" }, class: "btn btn-sm btn-secondary mt-1" %>
             <% else %>
               －
             <% end %>
