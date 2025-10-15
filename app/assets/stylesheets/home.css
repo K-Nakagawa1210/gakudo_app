@@ -1,0 +1,107 @@
+/* ====================================
+   全体的なスタイル (Body & Main Container)
+   ==================================== */
+body {
+    background-color: #f7f9fc;
+    font-family: 'Hiragino Sans', 'Meiryo', sans-serif;
+    color: #343a40;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ====================================
+   ヘッダーと時刻表示
+   ==================================== */
+.main-container h1 {
+    font-size: 2rem;
+    color: #333333;
+    margin-bottom: 30px;
+    /* h1はブロック要素なので、親要素でtext-align: center;が効く */
+}
+
+.clock {
+    font-size: 1.6rem;
+    font-weight: bold;
+    margin-bottom: 45px;
+    padding: 0;
+    background: none;
+    border-radius: 0;
+    color: #666666;
+    /* display: block;またはdisplay: inline-block;で、text-align: center; の影響下に置く */
+    display: block;
+}
+
+/* ====================================
+   メインメニューボタン
+   ==================================== */
+.menu-buttons {
+    display: grid;
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+/* メインボタンのサイズとデザイン調整 */
+.menu-buttons .btn {
+    padding: 20px 25px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    transition: all 0.2s ease-in-out;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+    text-align: center; /* ボタン内の文字を中央寄せ */
+}
+
+/* 1. 出席登録ボタン (薄いオレンジ) */
+.menu-buttons .btn-primary {
+    background-color: #ffe8cc;
+    color: #cc5500;
+    border-color: #ffb866;
+}
+
+/* 2. 出席一覧ボタン (薄いエメラルドグリーン) */
+.menu-buttons .btn-success {
+    background-color: #d1f7e8;
+    color: #008080;
+    border-color: #87e0c9;
+}
+
+.menu-buttons .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    opacity: 0.9;
+}
+
+.menu-buttons .btn:active {
+    transform: translateY(0);
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* ====================================
+   設定ボタンとフッター
+   ==================================== */
+.settings-button-area {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.settings-button-area .btn-warning {
+    padding: 12px 25px;
+    font-size: 1rem;
+    background-color: #fffacd;
+    border-color: #ffeb80;
+    color: #8b8000;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+footer {
+    margin-top: auto;
+    padding: 15px 0;
+    background-color: #ffffff;
+    border-top: 1px solid #e0e0e0;
+    text-align: center;
+}
