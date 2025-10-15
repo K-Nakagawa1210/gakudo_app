@@ -74,5 +74,8 @@ gem "sassc-rails"
 gem "cssbundling-rails", "~> 1.4"
 gem 'devise-i18n'
 gem 'whenever', require: false
+gem 'axlsx_rails'
+gem 'caxlsx'
+gem 'holidays', '~> 1.0'
 
 

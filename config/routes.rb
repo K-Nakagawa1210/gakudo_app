@@ -22,7 +22,7 @@ Rails.application.routes.draw do
 
   resources :attendances, only: [:index, :edit, :update] do
     collection do
-      get :export_csv
+      get :export_xlsx
     end
   end
 

@@ -1,34 +1,55 @@
-<div class="container mt-5 text-center">
+<div class="main-container text-center">
   <h1 class="mb-4"><%= current_user.club_name %>クラブ 管理ホーム</h1>
 
-  <!-- 現在時刻表示 -->
-  <div class="mb-4">
-    <h3>🕒 現在時刻：<span id="current-time"></span></h3>
+  <div class="clock">
+    🕒 <span id="current-time"></span>
   </div>
 
-  <!-- メインメニュー -->
-  <div class="row justify-content-center">
-    <div class="col-md-8">
-      <div class="d-grid gap-3">
-        <%= link_to "🏫 出席登録ページ", attendance_index_schools_path, class: "btn btn-primary" %>
-        <%= link_to "📋 出席一覧ページ", attendances_path, class: "btn btn-success btn-lg" %>
-        <%= link_to "⚙️ 設定", settings_path, class: "btn btn-warning btn-lg" %>
-        <%= button_to "🚪 ログアウト", destroy_user_session_path, method: :delete, data: { confirm: "本当にログアウトしますか？" }, class: "btn btn-outline-secondary w-100" %>
-      </div>
-    </div>
+  <div class="menu-buttons d-grid gap-3">
+    <%= link_to "🏫 出席登録", attendance_index_schools_path, class: "btn btn-primary btn-lg" %>
+    <%= link_to "📋 出席一覧", attendances_path, class: "btn btn-success btn-lg" %>
+  </div>
+
+  <div class="settings-button-area">
+    <%= link_to "⚙️ 設定", settings_path, class: "btn btn-warning btn-lg" %>
   </div>
 </div>
 
-<!-- 時刻をリアルタイム更新するスクリプト -->
+<footer>
+  <div class="d-flex justify-content-center">
+    <%= button_to "🚪 ログアウト", destroy_user_session_path, method: :delete,
+        data: { confirm: "本当にログアウトしますか？" },
+        class: "btn btn-outline-secondary btn-sm" %>
+  </div>
+  <p class="mt-2">© <%= Date.current.year %> <%= current_user.club_name %>クラブ</p>
+</footer>
+
 <script>
   function updateTime() {
     const now = new Date();
-    const formatted = now.toLocaleString('ja-JP', {
-      year: 'numeric', month: '2-digit', day: '2-digit',
-      hour: '2-digit', minute: '2-digit', second: '2-digit'
-    });
-    document.getElementById('current-time').textContent = formatted;
+    
+    // 日付のオプション
+    const dateOptions = {
+      year: 'numeric', 
+      month: '2-digit', 
+      day: '2-digit'
+    };
+    
+    // 時刻のオプション
+    const timeOptions = {
+      hour: '2-digit', 
+      minute: '2-digit', 
+      second: '2-digit'
+    };
+    
+    // 日付と時刻を別々にフォーマット
+    const datePart = now.toLocaleString('ja-JP', dateOptions);
+    const timePart = now.toLocaleString('ja-JP', timeOptions);
+
+    // 日付と時刻を「&nbsp;&nbsp;」でつなぎ、🕒の後に表示
+    document.getElementById('current-time').innerHTML = `${datePart} &nbsp;&nbsp; ${timePart}`;
   }
+  
   setInterval(updateTime, 1000);
   updateTime();
 </script>

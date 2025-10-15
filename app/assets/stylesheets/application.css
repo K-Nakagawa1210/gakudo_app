@@ -15,4 +15,4 @@
  */
 
  @import "bootstrap";
-
+ *= require_tree .

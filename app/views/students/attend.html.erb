@@ -5,7 +5,7 @@
   現在時刻：<span id="current-time"></span>
 </p>
 
-<%= form_with url: attend_create_school_students_path(@school), method: :post do %>
+<%= form_with url: attend_create_school_students_path(@school), method: :post, local: true do %>
   <ul>
     <% @students.each do |student| %>
       <li style="margin: 8px 0;">
