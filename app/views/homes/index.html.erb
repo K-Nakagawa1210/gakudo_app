@@ -1,12 +1,12 @@
 <div class="main-container text-center">
-  <h1 class="mb-4"><%= current_user.club_name %>クラブ 管理ホーム</h1>
+  <h1 class="mb-4"><%= current_user.club_name %> 管理ホーム</h1>
 
   <div class="clock">
     🕒 <span id="current-time"></span>
   </div>
 
   <div class="menu-buttons d-grid gap-3">
-    <%= link_to "🏫 出席登録", attendance_index_schools_path, class: "btn btn-primary btn-lg" %>
+    <%= link_to "🏫 登園・帰宅 登録", attendance_index_schools_path, class: "btn btn-primary btn-lg" %>
     <%= link_to "📋 出欠一覧", attendances_path, class: "btn btn-success btn-lg" %>
   </div>
 
