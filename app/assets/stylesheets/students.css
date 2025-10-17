@@ -1,0 +1,113 @@
+/* ====================================
+   児童一覧画面 (Student Index)
+   ==================================== */
+
+/* 時刻表示 (トップページと統一) */
+.clock-display {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 30px;
+    color: #666666; /* シンプルなグレー */
+}
+
+/* 学校名タイトル */
+.school-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #333333;
+    margin-bottom: 25px !important;
+}
+
+/* 児童グループカード */
+.student-group-card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* 影を控えめに */
+    overflow: hidden;
+}
+
+/* 学年ヘッダー */
+.grade-header {
+    background-color: #f0f0f0 !important; /* 薄いグレー */
+    color: #333333 !important;
+    font-size: 1.1rem;
+    padding: 12px;
+    border-bottom: none !important;
+}
+
+/* 児童リストコンテナ */
+.student-list {
+    padding: 10px;
+}
+
+/* 児童ボタン (個々の児童名) */
+.student-button {
+    /* ✅ ボタン風デザインの基本 */
+    cursor: pointer;
+    padding: 10px 5px;
+    margin: 5px 0; /* 行間の余白 */
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.2s ease-in-out;
+    
+    /* 選択されていない状態 (初期状態) */
+    background-color: #f7f7f7; /* 非常に薄いグレー */
+    color: #333333;
+    border: 1px solid #e0e0e0;
+}
+
+/* ✅ 1. カーソルが当たった時 (ホバー) */
+.student-button:hover {
+    background-color: #fffacd; /* 設定ボタンと同じ薄いレモン色 */
+    color: #8b8000;
+    border-color: #ffeb80;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* ✅ 2. クリック/選択された時 (.selected クラスがJSで追加される) */
+.student-button.selected {
+    background-color: #ffb866; /* ✅ 出席登録と同じ濃いめのオレンジ */
+    color: #ffffff; /* 白文字 */
+    border-color: #cc5500;
+    box-shadow: 0 0 5px rgba(204, 85, 0, 0.5); /* 選択されていることを示す影 */
+}
+
+/* 登園・帰宅ボタンエリア */
+.submit-buttons-area {
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 30px;
+}
+
+/* 登園/帰宅ボタン */
+.submit-buttons-area .btn-lg {
+    padding: 15px 40px; /* ✅ 大きくする */
+    font-size: 1.3rem;
+    font-weight: 700;
+    border-radius: 10px;
+    border: none;
+    transition: all 0.2s ease-in-out;
+}
+
+/* 登園ボタン (出席登録トーン) */
+.attend-btn {
+    background-color: #87e0c9; /* ✅ 薄いエメラルドグリーン */
+    color: #008080;
+}
+
+/* 帰宅ボタン (注意喚起トーン) */
+.leave-btn {
+    background-color: #ffb866; /* ✅ 薄いオレンジ */
+    color: #cc5500;
+}
+
+.submit-buttons-area .btn-lg:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.student-button input[type="checkbox"] {
+    display: none; 
+}
