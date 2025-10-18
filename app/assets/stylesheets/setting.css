@@ -1,0 +1,193 @@
+/* ====================================
+   設定画面 (Settings Index)
+   ==================================== */
+
+/* フォームを中央に配置するための狭いコンテナ (編集画面と同じものを再利用) */
+.main-container-narrow {
+    max-width: 550px; 
+    margin: 40px auto;
+    padding: 15px;
+    text-align: center;
+}
+
+/* 設定カード */
+.settings-card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    min-height: 250px; 
+    padding: 30px;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+}
+
+/* 設定リスト (<ul>) のスタイルリセット */
+.settings-list {
+    list-style: none; 
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center;
+    height: 100%;
+    width: 90%;
+}
+
+/* 個々のリストアイテム (<li>) */
+.settings-list li {
+    margin-bottom: 30px; /* ボタン間の間隔 */
+    width: 100%; 
+    max-width: 350px;
+}
+
+.settings-list li:last-child {
+    margin-bottom: 0;
+}
+
+/* 設定ボタン (リンク) */
+.setting-btn {
+    display: block; 
+    width: 90%;
+    padding: 15px 20px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    border-radius: 10px;
+    text-decoration: none;
+    background-color: #4A90E2;
+    color: #ffffff;
+    border: none;
+    text-align: center;
+    transition: all 0.2s ease-in-out;
+}
+
+.setting-btn:hover {
+    background-color: #357ABD;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transform: translateY(-1px);
+    color: #ffffff; 
+    text-decoration: none; 
+}
+
+/* ====================================
+   学校一覧・設定画面 (School Index/Settings)
+   ==================================== */
+
+.school-list-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #333;
+    text-align: center;
+}
+
+.back-button-area {
+    margin-bottom: 20px;
+}
+
+.action-button-area {
+    margin-bottom: 20px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.new-school-btn {
+    background-color: transparent; 
+    color: #4A90E2;
+    border: 1px solid #4A90E2;
+    font-weight: 600;
+    padding: 8px 15px;
+    border-radius: 6px;
+    transition: all 0.2s;
+    text-decoration: none;
+}
+
+.new-school-btn:hover {
+    background-color: #f0f8ff; 
+}
+
+.school-list-card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+}
+
+.school-table {
+    width: 100%;
+    margin-bottom: 0;
+    border-collapse: collapse;
+}
+
+.school-table th {
+    background-color: #f0f0f0;
+    color: #666666;
+    font-weight: 600;
+    border-color: #eeeeee;
+    padding: 12px;
+    text-align: center;
+}
+
+/* テーブルセル */
+.school-table td {
+    border-color: #eeeeee;
+    padding: 12px;
+    font-size: 0.95rem;
+    vertical-align: middle;
+}
+
+/* 学校名カラム */
+.school-table .school-name-col {
+    width: 65%;
+    text-align: left;
+    padding-left: 20px;
+}
+
+.school-table .school-name-cell {
+    font-weight: 500;
+    color: #333;
+    text-align: left;
+    padding-left: 20px;
+}
+
+/* 操作カラム */
+.school-table .operation-col {
+    width: 35%;
+    text-align: center;
+}
+
+.school-table .operation-cell {
+    white-space: nowrap;
+    text-align: center;
+}
+
+/* 操作ボタン（編集/削除）のスタイル */
+.school-table .action-btn {
+    padding: 4px 10px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 5px;
+    margin: 0 3px;
+    transition: all 0.2s;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+.school-table .action-btn.btn-warning {
+    color: #cc8000;
+    border: 1px solid #ffdd99;
+}
+
+.school-table .action-btn.btn-warning:hover {
+    background-color: #fff9e6;
+}
+
+.school-table .action-btn.btn-danger {
+    color: #cc0000; 
+    border: 1px solid #ffcccc;
+}
+
+.school-table .action-btn.btn-danger:hover {
+    background-color: #fff0f0;
+}

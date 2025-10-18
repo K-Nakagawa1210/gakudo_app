@@ -1,6 +1,18 @@
-<h1>設定</h1>
+<div class="main-container-narrow text-center">
+  
+  <h1 class="school-title mb-5">設定</h1>
 
-<ul>
-  <li><%= link_to "学校の設定", schools_path, class: "btn btn-warning btn-lg" %></li>
-  <li><%= link_to "児童の設定", manage_students_path, class: "btn btn-warning btn-lg" %></li>
-</ul>
+  <div class="card settings-card">
+    <ul class="settings-list">
+      
+      <li>
+        <%= link_to "学校の設定", schools_path, class: "setting-btn" %>
+      </li>
+      
+      <li>
+        <%= link_to "児童の設定", manage_students_path, class: "setting-btn" %>
+      </li>
+      
+    </ul>
+  </div>
+</div>
