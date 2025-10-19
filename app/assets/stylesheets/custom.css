@@ -4,9 +4,9 @@
 
 /* ヘッダー/ナビゲーション */
 .navbar {
-    background-color: #ffffff; /* 白基調 */
-    border-bottom: none; /* ナビゲーション下のラインを削除 */
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); /* 影のみでナビゲーションエリアを区切る */
+    background-color: #ffffff;
+    border-bottom: none;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); 
     padding-top: 10px;
     padding-bottom: 10px;
 }
@@ -15,21 +15,21 @@
 .navbar-brand {
     font-weight: 800;
     font-size: 1.6rem;
-    color: #333333; /* 濃いグレー */
+    color: #333333; 
 }
 
 /* 「トップに戻る」ボタン */
 .navbar .btn-outline-primary {
-    color: #666666; /* シンプルなグレー */
-    border-color: transparent; /* ボーダーを削除 */
-    background-color: transparent; /* 背景色も透明に */
+    color: #666666; 
+    border-color: transparent;
+    background-color: transparent; 
     font-weight: 600;
     transition: background-color 0.2s;
     text-decoration: none;
 }
 
 .navbar .btn-outline-primary:hover {
-    background-color: #f0f0f0; /* ホバー時のみ薄いグレーの背景を出す */
+    background-color: #f0f0f0; 
     color: #333333;
     border-color: transparent;
 }
@@ -46,7 +46,7 @@
 }
 
 .main-container-wide {
-    max-width: 800px; /* 幅を800px */
+    max-width: 800px; 
     margin: 30px auto;
     padding: 35px;
     background-color: #ffffff;
@@ -63,35 +63,33 @@
 .notice, .alert {
     padding: 12px 20px;
     margin-bottom: 15px;
-    border: none; /* ボーダーラインを削除 */
-    border-radius: 0; /* 角の丸みも削除してシャープに */
+    border: none;
+    border-radius: 0; 
     font-size: 1rem;
     font-weight: 500;
-    box-shadow: none; /* 影も削除 */
+    box-shadow: none; 
     opacity: 1;
     text-align: center;
-    
-    /* 背景色を微調整し、メッセージエリアを視覚的に分離 */
-    background-color: #f7f7f7; /* 非常に薄いグレーを背景色として使用 */
+    background-color: #f7f7f7; 
 }
 
 /* Flashメッセージエリア */
 .flash-messages {
-    padding-top: 10px; /* ナビゲーションバーとのわずかな隙間 */
+    padding-top: 10px;
 }
 
 /* メインコンテンツエリアに余白を適用 */
 .main-content-area {
-    padding-top: 100px; /* 100pxの余白を確保 */
+    padding-top: 100px; 
     padding-bottom: 20px;
 }
 
 /* 成功/情報通知 (notice) */
 .notice {
-    color: #333333; /* 文字色はシンプルに濃いグレー */
+    color: #333333; 
 }
 
 /* 警告/エラー通知 (alert) */
 .alert {
-    color: #333333; /* 文字色はシンプルに濃いグレー */
+    color: #333333; 
 }

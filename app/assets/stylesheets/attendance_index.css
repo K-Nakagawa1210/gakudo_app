@@ -31,13 +31,11 @@
     background-color: transparent;
 }
 
-/* 1. 学校名リンクのボタン風デザイン */
+/* 学校名リンクのボタン */
 .card-body .table-hover tbody tr td a {
     width: 85%; 
     margin: 10px auto;
     display: block;
-    
-    /* ボタン風のスタイル */
     padding: 10px 30px; 
     background-color: #ffe8cc;
     color: #cc5500; 
@@ -50,7 +48,7 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* 2. カーソルが当たった時の色変更（ホバー効果） */
+/* カーソルが当たった時の色変更（ホバー効果） */
 .card-body .table-hover tbody tr td a:hover {
     background-color: #ffb866; 
     color: #ffffff !important; 
