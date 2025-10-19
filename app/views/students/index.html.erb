@@ -1,53 +1,78 @@
-<div class="container my-4">
-  <div class="text-center mb-3">
-    <h5 id="current-time"><%= @today.strftime("%Y年%m月%d日 %H:%M:%S") %> 現在</h5>
-    <h3><%= @school.school_name %> の児童</h3>
+<div class="main-container text-center">
+
+  <div class="back-button-area mb-4">
+    <%= link_to "前のページに戻る", attendance_index_schools_path, class: "btn btn-outline-secondary btn-sm" %>
   </div>
+
+  <div class="clock-display mb-4">
+    🕒 <span id="current-time"></span>
+  </div>
+
+  <h2 class="school-title mb-4"><%= @school.school_name %> の児童</h2>
 
   <%= form_with url: attend_create_school_students_path(@school), method: :post, local: true, id: "attendance-form" do %>
     <% grouped_students = @students.group_by { |s| s.grade.level } %>
 
     <% grouped_students.sort.each do |grade_level, students| %>
-      <div class="card mb-3 shadow-sm">
-        <div class="card-header bg-light fw-bold"><%= grade_level %>年生</div>
-        <div class="card-body">
-          <div class="d-flex flex-wrap">
+      <div class="card mb-3 student-group-card">
+        <div class="card-header bg-light fw-bold grade-header"><%= grade_level %>年生</div>
+        <div class="card-body student-list">
+          
+          <div class="row row-cols-3 g-2"> 
             <% students.each do |student| %>
-              <div class="student-item border rounded m-1 p-2 text-center flex-fill"
-                   style="min-width: 100px; cursor: pointer;"
-                   data-student-id="<%= student.id %>">
-                <%= student.student_name %>
-                <%= check_box_tag "student_ids[]", student.id, false, class: "d-none" %>
+              <div class="col">
+                <div class="student-button" 
+                     data-student-id="<%= student.id %>"
+                     data-bs-toggle="tooltip" data-bs-placement="top" title="未選択">
+                  
+                  <%= student.student_name %>
+                  <%= check_box_tag "student_ids[]", student.id, false, class: "d-none" %>
+                  
+                </div>
               </div>
             <% end %>
           </div>
+          
         </div>
       </div>
     <% end %>
 
-    <div class="text-center mt-4">
-      <%= button_tag "登園", type: "submit", name: "action_type", value: "attend", class: "btn btn-success px-4 me-3" %>
-      <%= button_tag "帰宅", type: "submit", name: "action_type", value: "leave", class: "btn btn-danger px-4" %>
+    <div class="submit-buttons-area mt-5 mb-5">
+      <%= button_tag "登園", type: "submit", name: "action_type", value: "attend", class: "btn btn-lg attend-btn me-3" %>
+      <%= button_tag "帰宅", type: "submit", name: "action_type", value: "leave", class: "btn btn-lg leave-btn" %>
     </div>
   <% end %>
 </div>
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
+  // 時刻表示の関数を修正 (日付と時刻の間にスペースを挿入)
   function updateTime() {
     const now = new Date();
-    const year = now.getFullYear();
-    const month = now.getMonth() + 1;
-    const day = now.getDate();
-    const hours = String(now.getHours()).padStart(2, '0');
-    const minutes = String(now.getMinutes()).padStart(2, '0');
-    const seconds = String(now.getSeconds()).padStart(2, '0');
-
-    document.getElementById("current-time").textContent =
-      `${year}年${month}月${day}日 ${hours}:${minutes}:${seconds} 現在`;
+    const datePart = now.toLocaleString('ja-JP', {
+      year: 'numeric', month: '2-digit', day: '2-digit'
+    });
+    const timePart = now.toLocaleString('ja-JP', {
+      hour: '2-digit', minute: '2-digit', second: '2-digit'
+    });
+    // innerHTMLを使用してスペース（&nbsp;）を挿入
+    document.getElementById("current-time").innerHTML = `${datePart} &nbsp;&nbsp; ${timePart}`;
   }
 
-  updateTime();                 // 初回表示
-  setInterval(updateTime, 1000); // 1秒ごとに更新
+  updateTime();
+  setInterval(updateTime, 1000); 
+
+  // 児童ボタンの選択ロジック
+  document.querySelectorAll('.student-button').forEach(button => {
+    button.addEventListener('click', () => {
+      button.classList.toggle('selected');
+      
+      // 隠しチェックボックスの状態をトグル
+      const checkbox = button.querySelector('input[type="checkbox"]');
+      if (checkbox) {
+        checkbox.checked = !checkbox.checked;
+      }
+    });
+  });
 });
 </script>
