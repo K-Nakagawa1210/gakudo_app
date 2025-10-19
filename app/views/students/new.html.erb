@@ -1,24 +1,38 @@
-<h1><%= @student.new_record? ? "児童追加" : "児童編集" %></h1>
+<div class="main-container-narrow text-center">
 
-<%= form_with model: @student, local: true do |f| %>
-  <div>
-    <%= f.label :student_name, "児童名" %><br>
-    <%= f.text_field :student_name %>
+  <div class="back-button-area mb-4 d-flex justify-content-start">
+    <%= link_to "児童一覧に戻る", manage_students_path, class: "btn btn-outline-secondary btn-sm" %>
   </div>
 
-  <div>
-    <%= f.label :school_id, "学校" %><br>
-    <%= f.collection_select :school_id, @schools, :id, :school_name, prompt: "選択してください" %>
+  <h1 class="school-list-title mb-4">
+    <%= @student.new_record? ? "児童の追加" : "児童の編集" %>
+  </h1>
+
+  <div class="card shadow-lg student-edit-card">
+    <div class="card-body p-4">
+
+      <%= form_with model: @student, local: true, class: "edit-form" do |f| %>
+
+        <div class="form-group mb-4">
+          <%= f.label :student_name, "児童名", class: "form-label text-start" %>
+          <%= f.text_field :student_name, class: "form-control text-input", placeholder: "例: 山田 太郎" %>
+        </div>
+
+        <div class="form-group mb-4">
+          <%= f.label :school_id, "学校", class: "form-label text-start" %>
+          <%= f.collection_select :school_id, @schools, :id, :school_name, { prompt: "選択してください" }, class: "form-select select-input" %>
+        </div>
+
+        <div class="form-group mb-5">
+          <%= f.label :grade_id, "学年", class: "form-label text-start" %>
+          <%= f.collection_select :grade_id, Grade.all, :id, :grade_name, { prompt: "選択してください" }, class: "form-select select-input" %>
+        </div>
+
+        <div class="button-group mt-5">
+          <%= f.submit @student.new_record? ? "追加する" : "更新する", class: "btn btn-primary submit-btn me-3" %>
+        </div>
+      <% end %>
+    </div>
   </div>
 
-  <div>
-    <%= f.label :grade_id, "学年" %><br>
-    <%= f.collection_select :grade_id, Grade.all, :id, :grade_name, prompt: "選択してください" %>
-  </div>
-
-  <div>
-    <%= f.submit @student.new_record? ? "追加" : "更新", class: "btn btn-primary" %>
-  </div>
-<% end %>
-
-<%= link_to "一覧に戻る", students_path %>
+</div>
