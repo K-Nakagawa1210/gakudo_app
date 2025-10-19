@@ -15,7 +15,7 @@
     font-size: 1.5rem;
     font-weight: 700;
     color: #333333;
-    margin-bottom: 25px !important;
+    margin-bottom: 25px;
 }
 
 /* 児童グループカード */
@@ -28,11 +28,11 @@
 
 /* 学年ヘッダー */
 .grade-header {
-    background-color: #f0f0f0 !important; /* 薄いグレー */
-    color: #333333 !important;
+    background-color: #f0f0f0; /* 薄いグレー */
+    color: #333333;
     font-size: 1.1rem;
     padding: 12px;
-    border-bottom: none !important;
+    border-bottom: none;
 }
 
 /* 児童リストコンテナ */
@@ -42,7 +42,6 @@
 
 /* 児童ボタン (個々の児童名) */
 .student-button {
-    /* ✅ ボタン風デザインの基本 */
     cursor: pointer;
     padding: 10px 5px;
     margin: 5px 0; /* 行間の余白 */
@@ -57,7 +56,7 @@
     border: 1px solid #e0e0e0;
 }
 
-/* ✅ 1. カーソルが当たった時 (ホバー) */
+/* 1. カーソルが当たった時 (ホバー) */
 .student-button:hover {
     background-color: #fffacd; /* 設定ボタンと同じ薄いレモン色 */
     color: #8b8000;
@@ -66,9 +65,8 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* ✅ 2. クリック/選択された時 (.selected クラスがJSで追加される) */
 .student-button.selected {
-    background-color: #ffb866; /* ✅ 出席登録と同じ濃いめのオレンジ */
+    background-color: #ffb866; 
     color: #ffffff; /* 白文字 */
     border-color: #cc5500;
     box-shadow: 0 0 5px rgba(204, 85, 0, 0.5); /* 選択されていることを示す影 */
@@ -83,7 +81,7 @@
 
 /* 登園/帰宅ボタン */
 .submit-buttons-area .btn-lg {
-    padding: 15px 40px; /* ✅ 大きくする */
+    padding: 15px 40px;
     font-size: 1.3rem;
     font-weight: 700;
     border-radius: 10px;
@@ -93,13 +91,13 @@
 
 /* 登園ボタン (出席登録トーン) */
 .attend-btn {
-    background-color: #87e0c9; /* ✅ 薄いエメラルドグリーン */
+    background-color: #87e0c9; 
     color: #008080;
 }
 
 /* 帰宅ボタン (注意喚起トーン) */
 .leave-btn {
-    background-color: #ffb866; /* ✅ 薄いオレンジ */
+    background-color: #ffb866; 
     color: #cc5500;
 }
 

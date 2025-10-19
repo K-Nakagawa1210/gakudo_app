@@ -1,46 +1,63 @@
-<h1>出欠一覧（<%= @month.strftime("%Y年%m月") %>）</h1>
+<div class="main-container-fluid text-center">
 
-<div style="margin-bottom: 20px;">
-  <%= link_to "＜先月", attendances_path(month: (@month - 1.month).strftime("%Y-%m-01")), class: "btn btn-outline-primary" %>
-  <%= link_to "来月＞", attendances_path(month: (@month + 1.month).strftime("%Y-%m-01")), class: "btn btn-outline-primary" %>
+  <div class="header-area mb-4">
+    <div class="date-navigation-group">
+      <div class="mb-2">
+        <%= link_to "＜先月", attendances_path(month: (@month - 1.month).strftime("%Y-%m-01")), class: "btn btn-outline-secondary date-nav-btn me-2" %>
+        <%= link_to "来月＞", attendances_path(month: (@month + 1.month).strftime("%Y-%m-01")), class: "btn btn-outline-secondary date-nav-btn ms-2" %>
+      </div>
+      <h1 class="attendance-month-title"><%= @month.strftime("%Y年%m月") %> の出欠一覧</h1>
+    </div>
 
-  <%= link_to "Excel出力", export_xlsx_attendances_path(month: @month.strftime("%Y-%m-01")), class: "btn btn-success", style: "float: right;" %>
-</div>
+    <%= link_to "Excel出力", export_xlsx_attendances_path(month: @month.strftime("%Y-%m-01")), class: "btn export-btn" %>
+  </div>
 
-<table border="1" cellspacing="0" cellpadding="4" class="table table-bordered">
-  <thead>
-    <tr>
-      <th>児童名</th>
-      <% @dates_with_weekday.each do |day_str| %>
-        <th><%= day_str %></th>
-      <% end %>
-    </tr>
-  </thead>
-  <tbody>
-    <% @students.each do |student| %>
-      <tr>
-        <td><%= student.student_name %></td>
-        <% @dates.each do |day| %>
-          <% record = @attendances[day]&.find { |a| a.student_id == student.id } %>
-          <td style="text-align:center; vertical-align:middle;">
-            <% if record %>
-              <%= record.status == "present" ? "〇" : "×" %><br>
-              <% if record.arrival_time.present? %>
-                <small>登園: <%= record.arrival_time.strftime("%H:%M") %></small><br>
-              <% end %>
-              <% if record.leave_time.present? %>
-                <small>帰宅: <%= record.leave_time.strftime("%H:%M") %></small><br>
-              <% end %>
-              <%= link_to "編集", edit_attendance_path(record), data: { turbo_frame: "modal" }, class: "btn btn-sm btn-secondary mt-1" %>
-            <% else %>
-              －
+  <div class="table-responsive shadow-sm attendance-monthly-card">
+    <table class="table table-bordered attendance-monthly-table align-middle">
+      <thead>
+        <tr>
+          <th class="student-name-header">児童名</th>
+          <% @dates_with_weekday.each do |day_str| %>
+            <th><%= day_str %></th>
+          <% end %>
+        </tr>
+      </thead>
+      <tbody>
+        <% @students.each do |student| %>
+          <tr>
+            <td class="student-name-cell">
+              <%= student.student_name.gsub(' ', '<br>').html_safe %>
+            </td>
+            <% @dates.each do |day| %>
+              <% record = @attendances[day]&.find { |a| a.student_id == student.id } %>
+              
+              <td class="status-cell 
+                <%= record ? (record.status == 'present' ? 'status-present' : 'status-absent') : 'status-unrecorded' %>">
+                
+                <% if record %>
+                  <div class="time-container">
+                    <div class="arrival-time">
+                      <%= record.arrival_time.present? ? record.arrival_time.strftime("%H:%M") : '-' %>
+                    </div>
+                    <div class="leave-time">
+                      <%= record.leave_time.present? ? record.leave_time.strftime("%H:%M") : '-' %>
+                    </div>
+                  </div>
+                  <%= link_to "編集", edit_attendance_path(record), data: { turbo_frame: "modal" }, class: "btn btn-sm btn-edit mt-1" %>
+                <% else %>
+                  －
+                <% end %>
+              </td>
             <% end %>
-          </td>
+          </tr>
         <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      </tbody>
+    </table>
+  </div>
 
-<!-- モーダルのフレーム -->
-<turbo-frame id="modal"></turbo-frame>
+  <div class="bottom-button-container">
+    <%= link_to "トップに戻る", root_path, class: "back-to-top-btn" %>
+  </div>
+
+  <turbo-frame id="modal"></turbo-frame>
+</div>

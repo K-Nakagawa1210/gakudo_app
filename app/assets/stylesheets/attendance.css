@@ -1,0 +1,298 @@
+/* ====================================
+   月間出欠一覧画面 (Monthly Attendance List)
+   ==================================== */
+
+/* 全幅コンテナ (テーブルが大きいため、幅を最大限に利用) */
+.main-container-fluid {
+    width: 95%; /* 画面幅の95%を使用 */
+    max-width: 1400px; /* 最大幅を設定 */
+    margin: 30px auto;
+    padding: 15px;
+    text-align: center;
+}
+
+.table-responsive {
+    overflow-x: auto; /* 横方向のスクロールを許可 */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    border-radius: 10px;
+}
+
+/* ヘッダーエリア (月ナビゲーションと出力ボタン) */
+.header-area {
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; /* 上揃え */
+}
+
+.attendance-month-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 10px; /* タイトルとボタンの間に隙間 */
+}
+
+/* 月ナビゲーションボタン */
+.date-navigation-group {
+    display: flex;
+    flex-direction: column; 
+    align-items: flex-start; 
+}
+
+/* 月ナビゲーションボタン */
+.date-nav-btn {
+    border-radius: 6px;
+    padding: 5px 10px;
+    margin-bottom: 5px; 
+}
+
+/* Excel出力ボタン */
+.export-btn {
+    background-color: transparent; 
+    color: #4CAF50; 
+    border: 1px solid #4CAF50; 
+    font-weight: 600;
+    transition: all 0.2s;
+    padding: 8px 15px;
+    text-decoration: none;
+}
+
+.export-btn:hover {
+    background-color: #e0f2f1; /* ホバーで薄い背景色 */
+}
+
+/* テーブル全体 */
+.attendance-monthly-card {
+    border-radius: 10px;
+    overflow: visible;  
+}
+
+.attendance-monthly-table {
+    min-width: 1400px; 
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem; 
+}
+
+/* テーブルヘッダー (曜日と日付) */
+.attendance-monthly-table th {
+    background-color: #f0f0f0;
+    color: #333333;
+    font-weight: 600;
+    border: 1px solid #ddd;
+    padding: 4px 2px; /* パディングを小さくして幅を節約 */
+    text-align: center;
+    line-height: 1.1;
+    white-space: normal; /* 2行表示を許可 */
+    text-align: center; /* 既存の設定 (日付/曜日) */
+}
+
+/* 土曜・日曜の色分け */
+.attendance-monthly-table th.saturday {
+    color: #1e90ff; /* 青 */
+}
+
+.attendance-monthly-table th.sunday {
+    color: #dc3545; /* 赤 */
+}
+
+/* 児童名ヘッダーとセル (幅を広く) */
+.attendance-monthly-table .student-name-header {
+    min-width: 130px; /* 最小幅を保証 */
+    width: 12%; 
+    font-weight: 700;
+    text-align: center; 
+}
+
+.attendance-monthly-table .student-name-cell {
+    font-weight: 700;
+    color: #333333;
+    text-align: left;
+    white-space: normal;
+    padding-left: 15px;
+    vertical-align: middle; /* 縦方向中央寄せ */
+    height: 45px;
+}
+
+/* データセル */
+.attendance-monthly-table td {
+    border: 1px solid #ddd;
+    padding: 3px;
+    text-align: center;
+    vertical-align: middle; 
+    line-height: 1.1;
+    min-width: 50px; 
+    max-width: 50px;
+}
+
+/* 登園・帰宅時刻 */
+.attendance-monthly-table .arrival-time,
+.attendance-monthly-table .leave-time {
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0;
+}
+
+/* 編集ボタンのスタイルを調整 */
+.attendance-monthly-table .btn-edit {
+    font-size: 0.7rem;
+    padding: 2px 5px;
+    background-color: transparent; /* ボタン風 */
+    border: 1px solid #6c757d;
+    color: #6c757d;
+    border-radius: 4px;
+    transition: all 0.15s;
+    text-decoration: none;
+}
+
+.attendance-monthly-table .btn-edit:hover {
+    background-color: #f0f0f0;
+    border-color: #495057;
+    color: #495057;
+}
+
+.attendance-monthly-table th:not(.student-name-header),
+.attendance-monthly-table td:not(.student-name-cell) {
+    min-width: 55px; /* ✅ 最小幅を55pxに増加 */
+    max-width: 55px;
+}
+
+/* ====================================
+   状態の視覚化 (セルの背景色)
+   ==================================== */
+
+/* 1. 登園あり (present) - 薄いグリーン */
+.status-cell.status-present {
+    background-color: #f0fff0; /* 非常に薄いグリーン */
+}
+
+/* 2. 欠席/未登録 (absent/unrecorded) - グレー */
+.status-cell.status-absent,
+.status-cell.status-unrecorded {
+    background-color: #f7f7f7; /* 非常に薄いグレー */
+}
+
+/* 登園なしの場合はハイフンを中央に配置 */
+.status-cell:not(.status-present) {
+    font-weight: bold;
+    color: #999;
+    padding-top: 10px; /* 縦方向中央に近くなるように調整 */
+    padding-bottom: 10px;
+}
+
+/* ====================================
+   出欠編集画面 (Attendance Edit Form)
+   ==================================== */
+
+/* フォームを中央に配置するための狭いコンテナ */
+.main-container-narrow {
+    max-width: 550px;
+    margin: 40px auto;
+    padding: 15px;
+    text-align: center;
+}
+
+/* 編集カードの共通スタイル */
+.attendance-edit-card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+}
+
+.card-body {
+    padding: 30px;
+}
+
+.edit-header {
+    background-color: #f0f8ff; 
+    color: #333333;
+    padding: 15px 20px;
+    font-size: 1.1rem;
+    border-bottom: 1px solid #e0e0e0;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+/* フォームのラベル */
+.edit-form .form-label {
+    display: block;
+    font-weight: 600;
+    color: #555555;
+    margin-bottom: 8px;
+    text-align: left; /* 左寄せに戻す */
+    width: 100%;
+    margin-bottom: 12px;
+}
+
+/* フォームグループ */
+.edit-form .form-group {
+    text-align: center;
+    margin-bottom: 30px; 
+}
+
+.edit-form .form-select,
+.edit-form .form-control {
+    max-width: 300px; 
+    width: 100%;
+    display: inline-block; 
+}
+
+/* 選択ボックス (Select) */
+.edit-form .status-select {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 10px;
+    border: 1px solid #cccccc;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    font-size: 1.05rem;
+}
+
+.edit-form .status-select:focus {
+    border-color: #63b3ed;
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.3);
+}
+
+/* 時間入力フィールド */
+.edit-form .time-input {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 10px;
+    border: 1px solid #cccccc;
+    font-size: 1.05rem;
+    text-align: center; /* 時間を中央に表示 */
+}
+
+.edit-form .time-input:focus {
+    border-color: #63b3ed;
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.3);
+}
+
+/* ボタンのスタイル */
+.edit-form .submit-btn {
+    background-color: #4A90E2; 
+    color: #ffffff; 
+    border: none;
+    padding: 12px 30px;
+    font-weight: 700;
+    border-radius: 8px;
+    transition: background-color 0.2s;
+}
+
+.edit-form .submit-btn:hover {
+    background-color: #357ABD;
+}
+
+.edit-form .cancel-btn {
+    background-color: #A0AEC0; 
+    border: none;
+    padding: 10px 25px;
+    font-weight: 700;
+    border-radius: 8px;
+    transition: background-color 0.2s;
+    text-decoration: none;
+}
+
+.edit-form .cancel-btn:hover {
+    background-color: #718096;
+}

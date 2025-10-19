@@ -1,0 +1,355 @@
+/* ====================================
+   設定画面 (Settings Index)
+   ==================================== */
+
+/* フォームを中央に配置するための狭いコンテナ (編集画面と同じものを再利用) */
+.main-container-narrow {
+    max-width: 550px; 
+    margin: 40px auto;
+    padding: 15px;
+    text-align: center;
+}
+
+/* 設定カード */
+.settings-card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    min-height: 250px; 
+    padding: 30px;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+}
+
+/* 設定リスト (<ul>) のスタイルリセット */
+.settings-list {
+    list-style: none; 
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center;
+    height: 100%;
+    width: 90%;
+}
+
+/* 個々のリストアイテム (<li>) */
+.settings-list li {
+    margin-bottom: 30px; /* ボタン間の間隔 */
+    width: 100%; 
+    max-width: 350px;
+}
+
+.settings-list li:last-child {
+    margin-bottom: 0;
+}
+
+/* 設定ボタン (リンク) */
+.setting-btn {
+    display: block; 
+    width: 90%;
+    padding: 15px 20px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    border-radius: 10px;
+    text-decoration: none;
+    background-color: #4A90E2;
+    color: #ffffff;
+    border: none;
+    text-align: center;
+    transition: all 0.2s ease-in-out;
+}
+
+.setting-btn:hover {
+    background-color: #357ABD;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transform: translateY(-1px);
+    color: #ffffff; 
+    text-decoration: none; 
+}
+
+/* ====================================
+   学校一覧・設定画面 (School Index/Settings)
+   ==================================== */
+
+.school-list-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #333;
+    text-align: center;
+}
+
+.back-button-area {
+    margin-bottom: 20px;
+}
+
+.action-button-area {
+    margin-bottom: 20px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.new-school-btn {
+    background-color: transparent; 
+    color: #4A90E2;
+    border: 1px solid #4A90E2;
+    font-weight: 600;
+    padding: 8px 15px;
+    border-radius: 6px;
+    transition: all 0.2s;
+    text-decoration: none;
+}
+
+.new-school-btn:hover {
+    background-color: #f0f8ff; 
+}
+
+.school-list-card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+}
+
+.school-table {
+    width: 100%;
+    margin-bottom: 0;
+    border-collapse: collapse;
+}
+
+.school-table th {
+    background-color: #f0f0f0;
+    color: #666666;
+    font-weight: 600;
+    border-color: #eeeeee;
+    padding: 12px;
+    text-align: center;
+}
+
+/* テーブルセル */
+.school-table td {
+    border-color: #eeeeee;
+    padding: 12px;
+    font-size: 0.95rem;
+    vertical-align: middle;
+}
+
+/* 学校名カラム */
+.school-table .school-name-col {
+    width: 65%;
+    text-align: left;
+    padding-left: 20px;
+}
+
+.school-table .school-name-cell {
+    font-weight: 500;
+    color: #333;
+    text-align: left;
+    padding-left: 20px;
+}
+
+/* 操作カラム */
+.school-table .operation-col {
+    width: 35%;
+    text-align: center;
+}
+
+.school-table .operation-cell {
+    white-space: nowrap;
+    text-align: center;
+}
+
+/* 操作ボタン（編集/削除）のスタイル */
+.school-table .action-btn {
+    padding: 4px 10px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 5px;
+    margin: 0 3px;
+    transition: all 0.2s;
+    background-color: transparent;
+    min-width: 50px;
+    margin: 3px 5px;
+    text-decoration: none;
+}
+
+.school-table .action-btn.btn-warning {
+    color: #cc8000;
+    border: 1px solid #ffdd99;
+}
+
+.school-table .action-btn.btn-warning:hover {
+    background-color: #fff9e6;
+}
+
+.school-table .action-btn.btn-danger {
+    color: #cc0000; 
+    border: 1px solid #ffcccc;
+}
+
+.school-table .action-btn.btn-danger:hover {
+    background-color: #fff0f0;
+}
+
+/* ====================================
+   学校編集画面 (School Edit Form)
+   ==================================== */
+
+/* カードのスタイルは出欠編集画面のものを流用 */
+.school-edit-card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+}
+
+/* フォームグループは出欠編集画面のものを流用し、中央に寄せる */
+.school-edit-card .form-group {
+    text-align: center;
+    margin-bottom: 30px; 
+}
+
+/* ラベルは左寄せを維持 */
+.school-edit-card .form-label {
+    display: block;
+    font-weight: 600;
+    color: #555555;
+    margin-bottom: 8px;
+    text-align: left;
+    width: 100%;
+}
+
+/* 入力フィールドの共通スタイル */
+.school-edit-card .text-input,
+.student-edit-card .text-input {
+    max-width: 350px; 
+    width: 100%;
+    display: inline-block;
+    padding: 12px 15px;
+    border-radius: 10px;
+    border: 1px solid #cccccc;
+    font-size: 1.05rem;
+    text-align: left;
+}
+
+.school-edit-card .text-input:focus {
+    border-color: #63b3ed;
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.3);
+}
+
+/* 更新ボタンのスタイル */
+.school-edit-card .submit-btn {
+    background-color: #4A90E2; 
+    color: #ffffff;
+    border: none;
+    padding: 12px 30px;
+    font-weight: 700;
+    border-radius: 8px;
+    transition: background-color 0.2s;
+    min-width: 150px; 
+}
+
+.school-edit-card .submit-btn:hover {
+    background-color: #357ABD;
+}
+
+/* ====================================
+   児童一覧・設定画面 (Student Index/Settings)
+   ==================================== */
+
+/* テーブルヘッダーとセルの共通スタイルは school-table を流用 */
+
+.student-table {
+    width: 100%;
+    margin-bottom: 0;
+    border-collapse: collapse;
+}
+
+.student-table th {
+    background-color: #f0f0f0;
+    color: #666666;
+    font-weight: 600;
+    border-color: #eeeeee;
+    padding: 12px;
+    text-align: center;
+}
+
+.student-table td {
+    border-color: #eeeeee;
+    padding: 12px;
+    font-size: 0.95rem;
+    vertical-align: middle;
+}
+
+/* 児童名カラムの調整 */
+.student-table .student-name-col {
+    width: 25%;
+    text-align: left;
+    padding-left: 20px;
+}
+
+/* 操作カラムの調整 */
+.student-table .operation-col-student {
+    width: 20%;
+    text-align: center;
+}
+
+.student-table .operation-cell-student {
+    white-space: nowrap;
+    text-align: center;
+}
+
+/* 編集ボタンのアウトライン（btn-warning-outline） */
+.action-btn.btn-warning-outline {
+    color: #cc8000;
+    border: 1px solid #ffdd99;
+    text-decoration: none;
+}
+
+.action-btn.btn-warning-outline:hover {
+    background-color: #fff9e6;
+}
+
+/* 削除ボタンのアウトライン（btn-danger-outline） */
+.action-btn.btn-danger-outline {
+    color: #cc0000;
+    border: 1px solid #ffcccc;
+    text-decoration: none;
+}
+
+.action-btn.btn-danger-outline:hover {
+    background-color: #fff0f0;
+}
+
+/* ====================================
+   児童編集/追加画面 (Student Edit/New Form)
+   ==================================== */
+
+/* カードのスタイルは学校/出欠編集画面のものを流用 */
+.student-edit-card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+}
+
+/* 選択フィールド (select) の追加スタイル */
+.student-edit-card .select-input {
+    max-width: 350px; 
+    width: 100%;
+    display: inline-block;
+    padding: 12px 15px;
+    border-radius: 10px;
+    border: 1px solid #cccccc;
+    font-size: 1.05rem;
+    text-align: left;
+    height: auto; 
+}
+
+.student-edit-card .select-input:focus {
+    border-color: #63b3ed;
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.3);
+}

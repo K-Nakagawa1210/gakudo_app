@@ -95,3 +95,58 @@
 .alert {
     color: #333333; /* 文字色はシンプルに濃いグレー */
 }
+
+/* ====================================
+   月間出欠一覧画面 (Monthly Attendance List)
+   ==================================== */
+
+/* ... (既存のattendance-monthly-tableなどのスタイル) ... */
+
+/* ページ下部のボタン配置コンテナ */
+.bottom-button-container {
+    margin-top: 40px; /* テーブルとの間に十分な余白を確保 */
+    padding-bottom: 30px; /* ページ下部に余白を確保 */
+    text-align: center; /* コンテナ内の要素を中央寄せ */
+}
+
+/* トップに戻るボタンのスタイル */
+.back-to-top-btn {
+    /* 統一感のある青いプライマリボタンデザインを採用 */
+    background-color: #4A90E2; /* メインカラー */
+    color: #ffffff;
+    border: none;
+    padding: 12px 30px;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 8px; /* 角丸 */
+    box-shadow: 0 4px 10px rgba(74, 144, 226, 0.3); /* ソフトなシャドウ */
+    transition: all 0.2s ease-in-out;
+    display: inline-block; /* 中央寄せを可能にする */
+    text-decoration: none; /* リンクの下線を削除 */
+}
+
+.back-to-top-btn:hover {
+    background-color: #357ABD; /* ホバーで少し濃い青に */
+    box-shadow: 0 6px 15px rgba(74, 144, 226, 0.4); /* シャドウを強調 */
+    transform: translateY(-2px); /* わずかに浮き上がらせるエフェクト */
+    color: #ffffff; /* ホバー時も文字色を維持 */
+}
+
+/* outlineスタイルが必要な場合は以下を使用 */
+/*
+.back-to-top-btn-outline {
+    background-color: transparent;
+    color: #4A90E2;
+    border: 2px solid #4A90E2;
+    padding: 10px 28px;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 8px;
+    transition: all 0.2s;
+}
+
+.back-to-top-btn-outline:hover {
+    background-color: #4A90E2;
+    color: #ffffff;
+}
+*/

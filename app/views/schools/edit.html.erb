@@ -1,14 +1,27 @@
-<h1>学校情報を編集</h1>
+<div class="main-container-narrow text-center">
 
-<%= form_with model: @school, local: true do |f| %>
-  <div>
-    <%= f.label :school_name, "学校名" %><br>
-    <%= f.text_field :school_name %>
+  <div class="back-button-area mb-4 d-flex justify-content-start">
+    <%= link_to "学校一覧に戻る", schools_path, class: "btn btn-outline-secondary btn-sm" %>
   </div>
 
-  <div>
-    <%= f.submit "更新", class: "btn btn-success" %>
-  </div>
-<% end %>
+  <h1 class="school-list-title mb-4">学校情報を編集</h1>
 
-<%= link_to "一覧に戻る", schools_path %>
+  <div class="card shadow-lg school-edit-card">
+    <div class="card-body p-4">
+
+      <%= form_with model: @school, local: true, class: "edit-form" do |f| %>
+
+        <div class="form-group mb-5">
+          <%= f.label :school_name, "学校名", class: "form-label text-start" %>
+          <%= f.text_field :school_name, class: "form-control text-input", placeholder: "例: 〇〇小学校" %>
+        </div>
+
+        <div class="button-group mt-5">
+          <%= f.submit "更新する", class: "btn btn-primary submit-btn me-3" %>
+        </div>
+
+      <% end %>
+    </div>
+  </div>
+
+</div>

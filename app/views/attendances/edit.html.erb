@@ -1,23 +1,48 @@
-<h1>出欠編集 - <%= @attendance.student.student_name %> / <%= @attendance.date.strftime("%Y-%m-%d") %></h1>
-
-<%= form_with(model: @attendance, local: true) do |f| %>
-  <div>
-    <%= f.label :status, "出欠" %><br>
-    <%= f.select :status, Attendance.statuses.keys.map { |k| [k == "present" ? "〇 出席" : "× 欠席", k] } %>
+<div class="main-container-narrow text-center">
+  
+  <div class="back-button-area mb-4">
+    <!-- 戻るボタンを月間一覧に戻るように調整 -->
+    <%= link_to "出欠一覧に戻る", attendances_path(month: @attendance.date.beginning_of_month), class: "btn btn-outline-secondary btn-sm" %>
   </div>
 
-  <div>
-    <%= f.label :arrival_time, "登園時間" %><br>
-    <%= f.time_field :arrival_time, value: @attendance.arrival_time&.strftime("%H:%M") %>
+  <h2 class="school-title mb-4">出欠編集</h2>
+
+  <div class="card shadow-lg attendance-edit-card">
+    <div class="card-header edit-header fw-bold">
+      <%= @attendance.student.student_name %> / <%= @attendance.date.strftime("%Y年%m月%d日") %> の記録
+    </div>
+
+    <div class="card-body p-4">
+      
+      <!-- フォームの開始 -->
+      <%= form_with(model: @attendance, local: true, class: "edit-form") do |f| %>
+        
+        <!-- 1. 出欠ステータス -->
+        <div class="form-group mb-4">
+          <%= f.label :status, "■ 出欠ステータス", class: "form-label text-start" %>
+          <%= f.select :status, Attendance.statuses.keys.map { |k| [k == "present" ? "〇 出席" : "× 欠席", k] }, {}, class: "form-select status-select" %>
+        </div>
+
+        <!-- 2. 登園時間 -->
+        <div class="form-group mb-4">
+          <%= f.label :arrival_time, "■ 登園時刻", class: "form-label text-start" %>
+          <%= f.time_field :arrival_time, value: @attendance.arrival_time&.strftime("%H:%M"), class: "form-control time-input" %>
+        </div>
+
+        <!-- 3. 帰宅時間 -->
+        <div class="form-group mb-4">
+          <%= f.label :leave_time, "■ 帰宅時刻", class: "form-label text-start" %>
+          <%= f.time_field :leave_time, value: @attendance.leave_time&.strftime("%H:%M"), class: "form-control time-input" %>
+        </div>
+
+        <!-- 4. ボタンエリア -->
+        <div class="button-group mt-5">
+          <%= f.submit "更新する", class: "btn btn-primary submit-btn me-3" %>
+          <%= link_to "キャンセル", attendances_path(month: @attendance.date.beginning_of_month), class: "btn btn-secondary cancel-btn" %>
+        </div>
+      <% end %>
+      
+    </div>
   </div>
 
-  <div>
-    <%= f.label :leave_time, "帰宅時間" %><br>
-    <%= f.time_field :leave_time, value: @attendance.leave_time&.strftime("%H:%M") %>
-  </div>
-
-  <div style="margin-top:10px;">
-    <%= f.submit "更新", class: "btn btn-primary" %>
-    <%= link_to "キャンセル", attendances_path(month: @attendance.date.beginning_of_month), class: "btn btn-secondary" %>
-  </div>
-<% end %>
+</div>
