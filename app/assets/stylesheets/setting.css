@@ -191,3 +191,65 @@
 .school-table .action-btn.btn-danger:hover {
     background-color: #fff0f0;
 }
+
+/* ====================================
+   学校編集画面 (School Edit Form)
+   ==================================== */
+
+/* カードのスタイルは出欠編集画面のものを流用 */
+.school-edit-card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+}
+
+/* フォームグループは出欠編集画面のものを流用し、中央に寄せる */
+.school-edit-card .form-group {
+    text-align: center;
+    margin-bottom: 30px; 
+}
+
+/* ラベルは左寄せを維持 */
+.school-edit-card .form-label {
+    display: block;
+    font-weight: 600;
+    color: #555555;
+    margin-bottom: 8px;
+    text-align: left;
+    width: 100%;
+}
+
+/* 入力フィールドの共通スタイル */
+.school-edit-card .text-input {
+    max-width: 350px; 
+    width: 100%;
+    display: inline-block;
+    
+    padding: 12px 15px;
+    border-radius: 10px;
+    border: 1px solid #cccccc;
+    font-size: 1.05rem;
+    text-align: left;
+}
+
+.school-edit-card .text-input:focus {
+    border-color: #63b3ed;
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.3);
+}
+
+/* 更新ボタンのスタイル */
+.school-edit-card .submit-btn {
+    background-color: #4A90E2; 
+    color: #ffffff;
+    border: none;
+    padding: 12px 30px;
+    font-weight: 700;
+    border-radius: 8px;
+    transition: background-color 0.2s;
+    min-width: 150px; 
+}
+
+.school-edit-card .submit-btn:hover {
+    background-color: #357ABD;
+}
