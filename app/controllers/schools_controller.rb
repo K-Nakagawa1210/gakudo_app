@@ -31,7 +31,7 @@ class SchoolsController < ApplicationController
 
   def update
     if @school.update(school_params)
-      redirect_to school_path, notice: "#{@school.school_name}を更新しました"
+      redirect_to schools_path, notice: "#{@school.school_name}を更新しました"
     else
       render :edit, status: :unprocessable_entity
     end
