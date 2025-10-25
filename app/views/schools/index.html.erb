@@ -25,9 +25,9 @@
               <td class="school-name-cell"><%= school.school_name %></td>
               <td class="operation-cell">
                 <%= link_to "編集", edit_school_path(school), class: "btn btn-warning btn-sm action-btn" %>
-                <%= link_to "削除", school_path(school), 
-                    method: :delete, 
-                    data: { confirm: "本当に削除しますか？" },
+                <%= button_to "削除", school_path(school),
+                    method: :delete,
+                    onclick: "return confirm('本当に削除しますか？');",
                     class: "btn btn-danger btn-sm action-btn" %>
               </td>
             </tr>

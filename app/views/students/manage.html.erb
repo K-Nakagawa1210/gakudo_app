@@ -29,7 +29,10 @@
               <td class="text-center"><%= student.grade.level %>年</td>
               <td class="operation-cell-student">
                 <%= link_to "編集", edit_student_path(student), class: "btn btn-sm action-btn btn-warning-outline" %>
-                <%= link_to "削除", student_path(student), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" }, class: "btn btn-sm action-btn btn-danger-outline" %>
+                <%= button_to "削除", student_path(student),
+                    method: :delete,
+                    onclick: "return confirm('本当に削除しますか？');",
+                    class: "btn btn-sm action-btn btn-danger-outline" %>
               </td>
             </tr>
           <% end %>
