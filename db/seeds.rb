@@ -10,7 +10,7 @@ grades = [
 grades.each do |grade|
   # DBのカラム名に正しくマッピング
   Grade.create!(
-    name: grade[:grade_name],  # ← ここを必ず name にする
+    grade_name: grade[:grade_name],  # ← ここを必ず name にする
     level: grade[:level],
     year: grade[:year]
   )
