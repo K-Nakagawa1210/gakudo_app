@@ -1,7 +1,8 @@
 {
   "name": "your_app_name",
   "dependencies": {
-    "sass": "^1.x.x"
+    "sass": "^1.x.x",
+    "bootstrap": "^5.x.x"
   },
 
   "scripts": {
