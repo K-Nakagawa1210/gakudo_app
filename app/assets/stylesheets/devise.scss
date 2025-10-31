@@ -1,0 +1,109 @@
+// app/assets/stylesheets/devise.scss
+
+// ----------------------------------------
+// 1. 全体のコンテナと配置 (画面全体の中央配置)
+// ----------------------------------------
+.devise-center-wrapper {
+  display: flex;
+  justify-content: center; // 水平方向の中央
+  align-items: center;     // 垂直方向の中央
+  // 画面の残りの高さを占めるようにする (ナビバーを除く)
+  min-height: calc(100vh - 60px); // 60pxはナビバーの高さとして想定
+  margin: 0;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.form-container {
+  // Log inフォームのコンテナ
+  width: 100%;
+  max-width: 400px; // フォームの最大幅
+  padding: 40px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); // 影で立体感を出す
+}
+
+// ----------------------------------------
+// 2. タイトル
+// ----------------------------------------
+h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #333;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+// ----------------------------------------
+// 3. フォームフィールドと入力
+// ----------------------------------------
+.field {
+
+  label {
+    margin-bottom: 4px;
+    font-size: 14px;
+    color: #555;
+    font-weight: 500;
+  }
+
+  input[type="email"],
+  input[type="password"],
+  input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box; 
+    font-size: 16px;
+    transition: border-color 0.3s;
+
+    &:focus {
+      border-color: #007bff;
+      outline: none;
+    }
+    margin-bottom: 30px;
+  }
+}
+
+// ----------------------------------------
+// 4. アクションボタン
+// ----------------------------------------
+.actions {
+  margin-top: 30px;
+  
+  input[type="submit"] {
+    width: 100%;
+    padding: 12px 20px;
+    background-color: #007bff; // プライマリカラー
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-weight: 600;
+
+    &:hover {
+      background-color: #0056b3; // ホバーで暗く
+    }
+  }
+}
+
+// ----------------------------------------
+// 5. Deviseリンク (サインアップ、パスワードリセットなど)
+// ----------------------------------------
+.devise-links {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 14px;
+  
+  a {
+    color: #007bff;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
