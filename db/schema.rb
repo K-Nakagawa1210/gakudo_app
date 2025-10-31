@@ -45,8 +45,10 @@ ActiveRecord::Schema[7.1].define(version: 2025_10_11_052257) do
     t.bigint "grade_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
     t.index ["grade_id"], name: "index_students_on_grade_id"
     t.index ["school_id"], name: "index_students_on_school_id"
+    t.index ["user_id"], name: "index_students_on_user_id"
   end
 
   create_table "users", charset: "utf8mb3", force: :cascade do |t|
