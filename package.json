@@ -1,8 +1,13 @@
 {
   "name": "your_app_name",
   "dependencies": {
-
+    "sass": "^1.x.x"
   },
+
+  "scripts": {
+    "build:css": "echo 'No CSS bundling needed.'"
+  },
+
   "engines": {
     "node": "20.x" 
   }

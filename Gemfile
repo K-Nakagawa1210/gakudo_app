@@ -76,7 +76,7 @@ gem 'pry-rails'
 gem 'devise'
 gem "bootstrap", "~> 5.3"
 gem "sassc-rails"
-gem "cssbundling-rails", "~> 1.4"
+# gem "cssbundling-rails", "~> 1.4"
 gem 'devise-i18n'
 gem 'whenever', require: false
 gem 'axlsx_rails'
