@@ -1,7 +1,7 @@
-node_modules_path = Rails.root.join('node_modules').to_s
+bootstrap_path = Rails.root.join('node_modules', 'bootstrap', 'scss').to_s
 
 if defined?(SassC)
-  Rails.application.config.sassc.load_paths << node_modules_path
+  Rails.application.config.sassc.load_paths << bootstrap_path
 end
 
-Rails.application.config.assets.paths << node_modules_path
+Rails.application.config.assets.paths << bootstrap_path
