@@ -1,0 +1,9 @@
+{
+  "name": "your_app_name",
+  "dependencies": {
+
+  },
+  "engines": {
+    "node": "20.x" 
+  }
+}
