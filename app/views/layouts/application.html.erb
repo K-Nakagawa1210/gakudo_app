@@ -24,8 +24,17 @@
       <p class="alert"><%= alert %></p>
     </div>
 
-    <div class="container">
-      <%= yield %>
-    </div>
+    <%# ログイン/サインアップ画面にのみ適用するCSSコンテナの場所を定義 %>
+    <% if controller_name == 'sessions' || controller_name == 'registrations' %>
+      <%# Deviseフォーム専用のラッパー (中央配置を妨げない) %>
+      <div class="devise-center-wrapper">
+        <%= yield %>
+      </div>
+    <% else %>
+      <%# その他のページはBootstrapのコンテナを使用 %>
+      <div class="container">
+        <%= yield %>
+      </div>
+    <% end %>
   </body>
 </html>
