@@ -10,7 +10,7 @@ module GakudoApp
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.1
-    config.sassc.load_paths << Rails.root.join('node_modules')
+    # config.sassc.load_paths << Rails.root.join('node_modules')
     config.time_zone = 'Tokyo'         # 日本時間に設定
     config.active_record.default_timezone = :local  # DBに保存する時刻もローカルに
 
