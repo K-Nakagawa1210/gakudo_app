@@ -49,7 +49,7 @@
 
 ## 画面遷移図
 [※画面遷移図](https://gyazo.com/0899e81a1b493cbd9c8be170eb860c41)
-<img src="./docs/images/画面遷移図.png" width="300"> 
+<img src="./docs/images/画面遷移図.png" width="500"> 
 
 ## 開発環境
 - Ruby 3.x  
