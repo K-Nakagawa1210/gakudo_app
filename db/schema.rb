@@ -26,9 +26,9 @@ ActiveRecord::Schema[7.1].define(version: 2025_10_31_135732) do
   create_table "grades", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
     t.integer "level", null: false
+    t.integer "year"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "year"
   end
 
   create_table "schools", charset: "utf8mb3", force: :cascade do |t|
@@ -45,10 +45,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_10_31_135732) do
     t.bigint "grade_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id", null: false
     t.index ["grade_id"], name: "index_students_on_grade_id"
     t.index ["school_id"], name: "index_students_on_school_id"
-    t.index ["user_id"], name: "index_students_on_user_id"
   end
 
   create_table "users", charset: "utf8mb3", force: :cascade do |t|

@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  before_action :basic_auth, if: :production_or_development?
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :basic_auth
 
@@ -13,6 +14,10 @@ class ApplicationController < ActionController::Base
     authenticate_or_request_with_http_basic do |username, password|
       username == 'admin' && password == '2222'
     end
+  end
+
+  def production_or_development?
+    !Rails.env.test?
   end
   
 end
